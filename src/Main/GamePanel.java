@@ -1,40 +1,32 @@
 package Main;
 
 import java.awt.Dimension;
-import java.awt.Graphics2D;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
 
-import javax.swing.JPanel;
+import GameState.GameStateManager;
 
-public class GamePanel extends JPanel implements Runnable, KeyListener{
+public class GamePanel extends BufferedCanvas implements KeyListener{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Dimensions
-	private final int WIDTH = 1280;
-	private final int HEIGHT = 720;
+	public final static int WIDTH = 1280;
+	public final static int HEIGHT = 720;
 	
-	// Thread
-	private Thread thread;
-	private Boolean running;
-	private final int FPS = 60;
-	private int targetTime = 1000 / FPS;
-	
-	// Image
-	BufferedImage img;
-	Graphics2D g;
+	// Game state manager
+	private GameStateManager gsm;
 	
 	public GamePanel() {
-		super();
-		if (thread == null) {
-			thread = new Thread();
-			addKeyListener(this);
-			thread.start();
-			System.out.println("Thread running");
-		}
+		gsm = new GameStateManager();
+		addKeyListener(this);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		this.start();
 		setFocusable(true);
-		requestFocus();
+		requestFocusInWindow();
 	}
 	
 	@Override
@@ -42,16 +34,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
+		gsm.keyPressed(e.getKeyCode());
 	}
+	
 	@Override
 	public void keyReleased(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
+		gsm.keyReleased(e.getKeyCode());
 	}
+
 	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
+	public void render(Graphics g) {
+		gsm.draw(g);
+		gsm.update();
 	}
 }

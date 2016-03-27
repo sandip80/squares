@@ -16,11 +16,12 @@ public class Game {
 	 */
 	public static void main(String[] argv) {
 		JFrame window = new JFrame("Square Fare");
-		window.setContentPane(new GamePanel());
+		window.setVisible(true);
+		window.add(new GamePanel());
+		window.createBufferStrategy(2);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setResizable(false);
 		window.pack();
 		window.setLocationRelativeTo(null);
-		window.setVisible(true);
+		window.setResizable(false);
 	}
 }
