@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import GameState.GameStateManager;
+import Main.BufferedCanvas.CallbackThread;
 
 public class GamePanel extends BufferedCanvas implements KeyListener{
 	
@@ -22,13 +23,18 @@ public class GamePanel extends BufferedCanvas implements KeyListener{
 	
 	public GamePanel() {
 		gsm = new GameStateManager();
-		addKeyListener(this);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		this.start();
+		start();
 		setFocusable(true);
 		requestFocusInWindow();
 	}
 	
+	@Override
+	public void start() {
+		super.start();
+		addKeyListener(this);
+	}
+
 	@Override
 	public void keyTyped(KeyEvent e) {}
 	

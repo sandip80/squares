@@ -150,7 +150,7 @@ public abstract class BufferedCanvas
 
     /** Threading class.  The main BufferedCanvas spawns an instance
         of this class in order to control the animation thread. */
-    private class CallbackThread
+    class CallbackThread
         extends Thread
     {
         private boolean paused = false;

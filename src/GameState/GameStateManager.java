@@ -31,10 +31,10 @@ public class GameStateManager {
 	}
 	
 	public void keyPressed(int key) {
-		gameStates.get(currentState).update();
+		gameStates.get(currentState).keyPressed(key);
 	}
 	
 	public void keyReleased(int key) {
-		gameStates.get(currentState).update();
+		gameStates.get(currentState).keyReleased(key);
 	}
 }
