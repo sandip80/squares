@@ -18,7 +18,6 @@ public class Game {
 		JFrame window = new JFrame("Square Fare");
 		window.setVisible(true);
 		window.add(new GamePanel());
-		window.createBufferStrategy(2);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setResizable(false);
 		window.pack();
