@@ -1,4 +1,4 @@
-package GameState;
+package game.state;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -9,8 +9,8 @@ import java.awt.Graphics2D;
 
 import com.sun.glass.events.KeyEvent;
 
-import Main.GamePanel;
-import TileMap.Background;
+import game.tilemap.Background;
+import main.GamePanel;
 
 public class MenuState extends GameState {
 	

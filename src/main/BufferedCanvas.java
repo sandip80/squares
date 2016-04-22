@@ -35,7 +35,7 @@
    AWT.  This is left as an exercise to the reader :).
 
 */
-package Main;
+package main;
 import java.awt.*;
 
 /** Abstract base class for double-buffered animating Components.

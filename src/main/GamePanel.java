@@ -1,12 +1,12 @@
-package Main;
+package main;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import GameState.GameStateManager;
-import Main.BufferedCanvas.CallbackThread;
+import game.state.GameStateManager;
+import main.BufferedCanvas.CallbackThread;
 
 public class GamePanel extends BufferedCanvas implements KeyListener{
 	

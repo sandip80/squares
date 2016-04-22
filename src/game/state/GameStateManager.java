@@ -1,4 +1,4 @@
-package GameState;
+package game.state;
 
 import java.awt.Graphics;
 import java.util.ArrayList;

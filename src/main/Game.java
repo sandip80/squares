@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import javax.swing.JFrame;
 
@@ -20,8 +20,8 @@ public class Game {
 		window.add(new GamePanel());
 		window.createBufferStrategy(2);
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setResizable(false);
 		window.pack();
 		window.setLocationRelativeTo(null);
-		window.setResizable(false);
 	}
 }
