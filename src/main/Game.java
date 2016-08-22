@@ -3,15 +3,13 @@ package main;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferStrategy;
 
 import javax.swing.JFrame;
 
 import game.state.GameStateManager;
 
-public class Game extends Canvas implements Runnable, KeyListener {
+public class Game extends Canvas implements Runnable {
 	
 	/**
 	 * 
@@ -27,7 +25,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public boolean running = false;
 
 	// Game state manager
-	private GameStateManager gsm;
+	public GameStateManager gsm;
+	
+	// Key Handler
+	private KeyHandler kh;
 
 	public Game() {
 		gsm = new GameStateManager();
@@ -68,6 +69,8 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		long timer = System.currentTimeMillis();
 		double delta = 0;
 		
+		kh = new KeyHandler(this);
+		
 		while (running) {
 			long currentTime = System.nanoTime();
 			delta += (currentTime - lastTime) / nsPerTick;
@@ -75,7 +78,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 			
 			while (delta > 1) {
 				ticks++;
-				tick();
+				tick(ticks);
 				delta -= 1;
 			}
 
@@ -98,8 +101,7 @@ public class Game extends Canvas implements Runnable, KeyListener {
 		}
 	}
 	
-	public void tick() {
-		
+	public void tick(int ticks) {
 	}
 	
 	public void render() {
@@ -120,18 +122,4 @@ public class Game extends Canvas implements Runnable, KeyListener {
 	public static void main(String[] args) {
 		new Game().start();
 	}
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		gsm.keyPressed(e.getKeyCode());		
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		gsm.keyReleased(e.getKeyCode());
-		
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {}
 }

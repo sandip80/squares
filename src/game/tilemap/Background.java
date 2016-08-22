@@ -1,9 +1,7 @@
 package game.tilemap;
 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;

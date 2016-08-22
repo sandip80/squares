@@ -96,16 +96,10 @@ public class MenuState extends GameState {
 		if (currentOption == 2) {
 			System.exit(0);
 		} else if (currentOption == 1) {
-			drawHelp();
+			gsm.setState(GameStateManager.LEVEL1STATE);
 		} else {
 			// open game
 		}
-	}
-
-	private void drawHelp() {
-		Graphics2D g2D = (Graphics2D) parentg;
-		g2D.setColor(Color.GREEN);
-		drawCenteredString("HELP", Game.WIDTH, Game.HEIGHT * 1 / 4, g2D);
 	}
 
 	@Override
