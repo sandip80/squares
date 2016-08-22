@@ -6,11 +6,10 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
-import com.sun.glass.events.KeyEvent;
+import java.awt.event.KeyEvent;
 
 import game.tilemap.Background;
-import main.GamePanel;
+import main.Game;
 
 public class MenuState extends GameState {
 	
@@ -29,8 +28,8 @@ public class MenuState extends GameState {
 		this.gsm = gsm;
 		currentOption = 0;
 		try {
-			bg = new Background("/background/menuBG.gif", 1);
-			bg.setDifferentialChange(-5, 0);
+			bg = new Background("/background/menuBG.gif");
+			bg.setDifferentialChange(-1, 0);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
 			e.printStackTrace();
@@ -60,11 +59,11 @@ public class MenuState extends GameState {
 			} else {
 				g2D.setColor(Color.BLACK);
 			}
-			g2D.setStroke(new BasicStroke(5));
-			g2D.drawRect(GamePanel.WIDTH / 2 - 100, GamePanel.HEIGHT / 3 - 75 / 2 + 120 * i, 200, 75);
+			g2D.setStroke(new BasicStroke(3));
+			g2D.drawRect(Game.WIDTH / 2 - 50, Game.HEIGHT / 3 - 25 + 60 * i, 100, 50);
 			g2D.setStroke(new BasicStroke(1));
-			g2D.setFont(new Font("Calibri", Font.PLAIN, 50));
-			drawCenteredString(options[i], GamePanel.WIDTH, GamePanel.HEIGHT * 2 / 3 + 240 * i, g2D);
+			g2D.setFont(new Font("Calibri", Font.PLAIN, 25));
+			drawCenteredString(options[i], Game.WIDTH, Game.HEIGHT * 2 / 3 + 120 * i, g2D);
 		}	
 	}
 
@@ -97,10 +96,16 @@ public class MenuState extends GameState {
 		if (currentOption == 2) {
 			System.exit(0);
 		} else if (currentOption == 1) {
-			// open help window
+			drawHelp();
 		} else {
 			// open game
 		}
+	}
+
+	private void drawHelp() {
+		Graphics2D g2D = (Graphics2D) parentg;
+		g2D.setColor(Color.GREEN);
+		drawCenteredString("HELP", Game.WIDTH, Game.HEIGHT * 1 / 4, g2D);
 	}
 
 	@Override
