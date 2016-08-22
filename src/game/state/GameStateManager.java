@@ -9,12 +9,14 @@ public class GameStateManager {
 	private int currentState;
 	
 	public static final int MENUSTATE = 0;
-	public static final int LEVEL1STATE = 1;
+	public static final int HELPSTATE = 1;
+	public static final int LEVEL1STATE = 2;
 	
 	public GameStateManager() {
 		gameStates = new ArrayList<>();
 		currentState = MENUSTATE;
 		gameStates.add(new MenuState(this));
+		gameStates.add(new HelpState(this, (MenuState) gameStates.get(MENUSTATE)));
 		gameStates.add(new LevelOneState(this));
 	}
 	

@@ -17,13 +17,8 @@ public class Background {
 	private double dx;
 	private double dy;
 	
-	public Background(String name) {
-		try {
-			image = ImageIO.read(getClass().getResourceAsStream(name));
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
+	public Background(String path) {
+		image = ImageLoader.getImage(path);
 		x = 0;
 		y = 0;
 	}

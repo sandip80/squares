@@ -13,7 +13,7 @@ import main.Game;
 
 public class MenuState extends GameState {
 	
-	private Background bg;
+	protected Background bg;
 	
 	private final String[] options = {
 		"Start",
@@ -22,7 +22,7 @@ public class MenuState extends GameState {
 	};
 	
 	private int currentOption;
-	Graphics parentg;
+	protected Graphics parentg;
 		
 	public MenuState(GameStateManager gsm) {
 		this.gsm = gsm;
@@ -96,9 +96,9 @@ public class MenuState extends GameState {
 		if (currentOption == 2) {
 			System.exit(0);
 		} else if (currentOption == 1) {
-			gsm.setState(GameStateManager.LEVEL1STATE);
+			gsm.setState(GameStateManager.HELPSTATE);
 		} else {
-			// open game
+			gsm.setState(GameStateManager.LEVEL1STATE);
 		}
 	}
 
