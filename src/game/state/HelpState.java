@@ -1,10 +1,11 @@
 package game.state;
 
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import com.sun.glass.events.KeyEvent;
+import java.awt.event.KeyEvent;
 
 import main.Game;
 
@@ -38,7 +39,7 @@ public class HelpState extends MenuState {
 
 	@Override
 	public void keyPressed(int key) {
-		if(key == KeyEvent.VK_BACKSPACE) {
+		if(key == KeyEvent.VK_BACK_SPACE) {
 			gsm.setState(GameStateManager.MENUSTATE);
 		}
 	}
