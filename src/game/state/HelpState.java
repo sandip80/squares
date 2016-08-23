@@ -27,7 +27,7 @@ public class HelpState extends MenuState {
 	@Override
 	public void draw(Graphics g) {
 		parentg = g;
-		bg.draw(g);
+		drawBackground(g);
 		drawHelp(g);
 	}
 
@@ -39,7 +39,7 @@ public class HelpState extends MenuState {
 
 	@Override
 	public void keyPressed(int key) {
-		if(key == KeyEvent.VK_BACK_SPACE) {
+		if (key == KeyEvent.VK_BACK_SPACE) {
 			gsm.setState(GameStateManager.MENUSTATE);
 		}
 	}

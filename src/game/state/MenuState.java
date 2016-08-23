@@ -7,13 +7,14 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 import game.tilemap.Background;
 import main.Game;
 
 public class MenuState extends GameState {
 	
-	protected Background bg;
+	protected ArrayList<Background> bg;
 	
 	private final String[] options = {
 		"Start",
@@ -27,12 +28,23 @@ public class MenuState extends GameState {
 	public MenuState(GameStateManager gsm) {
 		this.gsm = gsm;
 		currentOption = 0;
-		try {
-			bg = new Background("/background/menuBG.gif");
-			bg.setDifferentialChange(-1, 0);
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
+		bg = new ArrayList<Background>();
+		for (int i = 0; i < 4; i++) {
+			Background b = new Background("/Background/bg_layer" + new Integer(i + 1).toString() + ".png");
+			b.setDifferentialChange(-i, 0);
+			bg.add(b);
+		}
+	}
+	
+	protected void drawBackground(Graphics g) {
+		for (int i = 0; i < bg.size(); i++) {
+			bg.get(i).draw(g);
+		}
+	}
+	
+	protected void updateBackground() {
+		for (int i = 0; i < bg.size(); i++) {
+			bg.get(i).update();
 		}
 	}
 
@@ -41,13 +53,13 @@ public class MenuState extends GameState {
 
 	@Override
 	public void update() {
-		bg.update();
+		updateBackground();
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		parentg = g;
-		bg.draw(g);
+		drawBackground(g);
 		drawOptions(g);
 	}
 

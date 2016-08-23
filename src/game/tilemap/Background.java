@@ -2,15 +2,13 @@ package game.tilemap;
 
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-
-import javax.imageio.ImageIO;
+import java.io.IOException;
 
 import main.Game;
 
 public class Background {
 	
-	private BufferedImage image;
+	private Image image;
 	
 	private double x;
 	private double y;
@@ -18,7 +16,13 @@ public class Background {
 	private double dy;
 	
 	public Background(String path) {
-		image = ImageLoader.getImage(path);
+		try {
+			image = ImageLoader.getImage(path);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		image = image.getScaledInstance(Game.WIDTH, Game.HEIGHT, 
+				Image.SCALE_SMOOTH);
 		x = 0;
 		y = 0;
 	}
@@ -40,14 +44,12 @@ public class Background {
 	}
 	
 	public void draw(Graphics g) {
-		Image img = image.getScaledInstance(Game.WIDTH, Game.HEIGHT, 
-				Image.SCALE_SMOOTH);
-		g.drawImage(img, (int) x, (int) y, null);
+		g.drawImage(image, (int) x, (int) y, null);
 		if (x < 0) {
-			g.drawImage(img, (int) x + Game.WIDTH, (int) y, null);
+			g.drawImage(image, (int) x + Game.WIDTH, (int) y, null);
 		}
 		if (x > 0) {
-			g.drawImage(img, (int) x - Game.WIDTH, (int) y, null);
+			g.drawImage(image, (int) x - Game.WIDTH, (int) y, null);
 		}
 	}
 }

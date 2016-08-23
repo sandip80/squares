@@ -78,17 +78,41 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	@Override
-	public void run() {		
+	public void run() {
 		init();
+
+		int fps = 60;
+		double timepertick = 1000000000D / fps;
+		double delta = 0;
+		int frames = 0;
+		long timer = 0;
 		
+		long lasttime = System.nanoTime();
 		while (running) {
-			tick();
-			render();
+			long currenttime = System.nanoTime();
+			delta += (currenttime - lasttime) / timepertick;
+			timer += currenttime - lasttime;
+			lasttime = currenttime;
+			
+			if (delta > 1) {
+				tick();
+				render();
+				delta--;
+				frames++;
+			}
+			
+			if (timer >= 1000000000) {
+				System.out.println("Frames " + frames);
+				frames = 0;
+				timer = 0;
+			}
+			
 			try {
 				Thread.sleep(2);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+			
 		}
 	}
 	
