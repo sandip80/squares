@@ -1,25 +1,21 @@
 package game.entities;
 
-public enum Entity {
-	ENEMY, ENVIRONMENT, HUD, ITEM, PARTICLE, PLAYER;
+import java.awt.Graphics;
 
-	public static Entity get(String type) {
-		switch(type) {
-			case "ENEMY":
-				return ENEMY;
-			case "ENVIRONMENT":
-				return ENVIRONMENT;
-			case "HUD":
-				return HUD;
-			case "ITEM":
-				return ITEM;
-			case "PARTICLE":
-				return PARTICLE;
-			case "PLAYER":
-				return PLAYER;
-			default:
-				return null;
-				
-		}
+public abstract class Entity {
+
+	protected float x, y;
+	protected float scale = 1;
+	protected EntityData ed;
+	
+	public Entity(float x, float y, EntityData ed) {
+		this.x = x;
+		this.y = y;
+		this.ed = ed;
+		init();
 	}
+	
+	public abstract void init();
+	public abstract void update();
+	public abstract void draw(Graphics g);
 }

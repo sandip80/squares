@@ -7,8 +7,8 @@ import java.util.Map;
 import game.tilemap.SpriteSheet;
 import game.ultilities.FileParser;
 
-public class EntityData {
-	private Map<Entity, List<EntityObject>> ed;
+public final class EntityData {
+	private Map<EntityType, List<EntityObject>> ed;
 	
 	public EntityData(String datapath, SpriteSheet sheet) {
 		ed = new HashMap<>();
@@ -19,7 +19,7 @@ public class EntityData {
 		}
 	}
 	
-	public Map<Entity, List<EntityObject>> getEntityData() {
+	public Map<EntityType, List<EntityObject>> getEntityData() {
 		return ed;
 	}
 }

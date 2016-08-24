@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import game.entities.Entity;
+import game.entities.EntityType;
 import game.entities.EntityObject;
 import game.tilemap.SpriteSheet;
 
@@ -35,7 +35,7 @@ public class FileParser {
     }
     
     public static void parseEntityData(String filename, SpriteSheet sp,
-    		Map<Entity, List<EntityObject>> entityMap) throws MalformedDataException{
+    		Map<EntityType, List<EntityObject>> entityMap) throws MalformedDataException{
     	BufferedReader reader = null;
     	
     	try {
@@ -60,16 +60,16 @@ public class FileParser {
             	String width = tokens[4].split("=")[1];
             	String height = tokens[5].split("=")[1];
             	BufferedImage entityImage = sp.crop(new Integer(x).intValue(),
-            								new Integer(y).intValue(),
-            								new Integer(width).intValue(),
-            								new Integer(height).intValue());
-            	EntityObject et = new EntityObject(entityImage, type, name);
-            	List<EntityObject> eo = entityMap.get(Entity.get(type));
+            										new Integer(y).intValue(),
+            										new Integer(width).intValue(),
+            										new Integer(height).intValue());
+            	EntityObject et = new EntityObject(entityImage, name);
+            	List<EntityObject> eo = entityMap.get(EntityType.get(type));
             	if (eo == null) {
             		eo = new ArrayList<EntityObject>();
             	}
             	eo.add(et);
-            	entityMap.put(Entity.get(type), eo);
+            	entityMap.put(EntityType.get(type), eo);
             }
     	} catch(IOException e) {
     		e.printStackTrace();

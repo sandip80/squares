@@ -2,49 +2,46 @@ package game.state;
 
 import java.awt.Graphics;
 
-import game.entities.Coin;
 import game.entities.EntityData;
+import game.entities.Player;
 import game.tilemap.SpriteSheet;
 
 public class LevelOneState extends GameState{
 	
 //	private GameMap map;
-//	private Player player;
+	private Player player;
 //	private ArrayList<Enemy> enemies;
 //	private HUD hud;
-	private Coin c;
+//	private Coin c;
 	private EntityData ed;
 	
 	public LevelOneState(GameStateManager gsm) {
 		this.gsm = gsm;
 		ed = new EntityData("/Spritesheets/spritesheet.dat", new SpriteSheet("/Spritesheets/spritesheet.png"));
-		c = new Coin(ed);
+		player = new Player(100, 100, ed);
 	}
 
 	@Override
-	public void init() {
-	}
+	public void init() {}
 
 	@Override
 	public void update() {
-		c.update();
+		player.update();
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		c.draw(g);
+		player.draw(g);
 	}
 
 	@Override
 	public void keyPressed(int key) {
-		// TODO Auto-generated method stub
-		
+		player.keyPressed(key);		
 	}
 
 	@Override
 	public void keyReleased(int key) {
-		// TODO Auto-generated method stub
-		
+		player.keyReleased(key);
 	}
 	
 }
