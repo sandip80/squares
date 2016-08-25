@@ -1,19 +1,18 @@
 package game.state;
 
 import java.awt.Color;
-
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
-import java.awt.event.KeyEvent;
 
 import main.Game;
 
 public class HelpState extends MenuState {
+	private final MenuState ms;
 
-	public HelpState(GameStateManager gsm, MenuState ms) {
-		super(gsm);
+	public HelpState(GameStateManager gsm, Game game, MenuState ms) {
+		super(gsm, game);
 		this.bg = ms.bg;
+		this.ms = ms;
 	}
 
 	@Override
@@ -21,12 +20,15 @@ public class HelpState extends MenuState {
 
 	@Override
 	public void update() {
-		super.update();
+		if (game.getKeyHandler().backspace) {
+			gsm.setState(GameStateManager.MENUSTATE);
+		}
+		this.currentOption = ms.currentOption;
+		updateBackground();
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		parentg = g;
 		drawBackground(g);
 		drawHelp(g);
 	}
@@ -36,15 +38,4 @@ public class HelpState extends MenuState {
 		g2D.setColor(Color.GREEN);
 		drawCenteredString("HELP", Game.WIDTH, Game.HEIGHT, g2D);
 	}
-
-	@Override
-	public void keyPressed(int key) {
-		if (key == KeyEvent.VK_BACK_SPACE) {
-			gsm.setState(GameStateManager.MENUSTATE);
-		}
-	}
-
-	@Override
-	public void keyReleased(int key) {}
-
 }

@@ -6,15 +6,16 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import game.tilemap.Background;
 import main.Game;
+import main.KeyHandler;
 
 public class MenuState extends GameState {
 	
-	protected ArrayList<Background> bg;
+	protected List<Background> bg;
 	
 	private final String[] options = {
 		"Start",
@@ -22,11 +23,13 @@ public class MenuState extends GameState {
 		"Quit"
 	};
 	
-	private int currentOption;
-	protected Graphics parentg;
+	protected int currentOption;
+	private boolean flagup = true;
+	private boolean flagdown = true;
+	private KeyHandler kh;
 		
-	public MenuState(GameStateManager gsm) {
-		this.gsm = gsm;
+	public MenuState(GameStateManager gsm, Game game) {
+		super(gsm, game);
 		currentOption = 0;
 		bg = new ArrayList<Background>();
 		for (int i = 0; i < 4; i++) {
@@ -34,6 +37,7 @@ public class MenuState extends GameState {
 			b.setDifferentialChange(-i, 0);
 			bg.add(b);
 		}
+		kh = game.getKeyHandler();
 	}
 	
 	protected void drawBackground(Graphics g) {
@@ -53,12 +57,36 @@ public class MenuState extends GameState {
 
 	@Override
 	public void update() {
+		if (kh.up) {
+			if (flagup) {
+				currentOption--;
+				flagup = false;
+			}
+			if (currentOption < 0) {
+				currentOption = options.length - 1;
+			}
+		} else if (kh.down) {
+			if (flagdown) {
+				currentOption++;
+				flagdown = false;
+			}
+			if (currentOption == options.length) {
+				currentOption = 0;
+			}
+		} else if (kh.enter) {
+			createEvent();
+		}
+		if (!kh.up) {
+			flagup = true;
+		} 
+		if (!kh.down) {
+			flagdown = true;
+		}
 		updateBackground();
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		parentg = g;
 		drawBackground(g);
 		drawOptions(g);
 	}
@@ -86,24 +114,6 @@ public class MenuState extends GameState {
 	    g2D.drawString(s, x, y);
 	}
 
-	@Override
-	public void keyPressed(int key) {
-		if (key == KeyEvent.VK_UP) {
-			currentOption--;
-			if (currentOption < 0) {
-				currentOption = options.length - 1;
-			}
-		} else if (key == KeyEvent.VK_DOWN) {
-			currentOption++;
-			if (currentOption == options.length) {
-				currentOption = 0;
-			}
-		} else if (key == KeyEvent.VK_ENTER) {
-			createEvent();
-		}
-		
-	}
-
 	private void createEvent() {
 		if (currentOption == 2) {
 			System.exit(0);
@@ -113,8 +123,4 @@ public class MenuState extends GameState {
 			gsm.setState(GameStateManager.LEVEL1STATE);
 		}
 	}
-
-	@Override
-	public void keyReleased(int key) {}
-
 }

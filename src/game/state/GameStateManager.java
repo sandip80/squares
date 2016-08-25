@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
 
+import main.Game;
+
 public class GameStateManager {
 	private List<GameState> gameStates;
 	private int currentState;
@@ -12,12 +14,12 @@ public class GameStateManager {
 	public static final int HELPSTATE = 1;
 	public static final int LEVEL1STATE = 2;
 	
-	public GameStateManager() {
+	public GameStateManager(Game game) {
 		gameStates = new ArrayList<>();
 		currentState = MENUSTATE;
-		gameStates.add(new MenuState(this));
-		gameStates.add(new HelpState(this, (MenuState) gameStates.get(MENUSTATE)));
-		gameStates.add(new LevelOneState(this));
+		gameStates.add(new MenuState(this, game));
+		gameStates.add(new HelpState(this, game, (MenuState) gameStates.get(MENUSTATE)));
+		gameStates.add(new LevelOneState(this, game));
 	}
 	
 	public void setState(int state) {
@@ -31,13 +33,5 @@ public class GameStateManager {
 	
 	public void draw(Graphics g) {
 		gameStates.get(currentState).draw(g);
-	}
-	
-	public void keyPressed(int key) {
-		gameStates.get(currentState).keyPressed(key);
-	}
-	
-	public void keyReleased(int key) {
-		gameStates.get(currentState).keyReleased(key);
 	}
 }

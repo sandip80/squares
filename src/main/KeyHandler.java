@@ -3,24 +3,34 @@ package main;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import game.state.GameStateManager;
-
 public class KeyHandler implements KeyListener {
-	private GameStateManager gsm;
+	private boolean[] keys;
 	
-	public KeyHandler(Game game) {
-		game.addKeyListener(this);
-		gsm = game.getGSM();
+	public boolean up, down, left, right, space, enter, escape, backspace;
+	
+	public KeyHandler() {
+		keys = new boolean[256];
 	}
 
+	public void tick() {
+		up = keys[KeyEvent.VK_UP];
+		down = keys[KeyEvent.VK_DOWN];
+		left = keys[KeyEvent.VK_LEFT];
+		right = keys[KeyEvent.VK_RIGHT];
+		space = keys[KeyEvent.VK_SPACE];
+		enter = keys[KeyEvent.VK_ENTER];
+		escape = keys[KeyEvent.VK_ESCAPE];
+		backspace = keys[KeyEvent.VK_BACK_SPACE];
+	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
-		gsm.keyPressed(e.getKeyCode());
+		keys[e.getKeyCode()] = true;
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {	
-		gsm.keyReleased(e.getKeyCode());
+		keys[e.getKeyCode()] = false;
 	}
 
 	@Override
