@@ -52,7 +52,7 @@ public class Player extends Creature {
 
 	private void animatePlayer() {
 		long currenttime = System.nanoTime();
-		delta += (currenttime - lasttime) * 1.5 / 1000000000D;
+		delta += (currenttime - lasttime) * 3.5 / 1000000000D;
 		lasttime = currenttime;
 		if (delta > 1) {
 			if (dx == 0 && dy == 0) {
