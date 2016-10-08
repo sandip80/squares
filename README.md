@@ -1,2 +1,2 @@
 # squares
-A simple square game.
+Simple game engine.
